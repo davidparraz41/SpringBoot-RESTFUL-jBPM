@@ -14,7 +14,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>rentacar</name>
-	<description>Proyecto Spring Boot con Jbpmn</description>
+	<description>Proyecto Spring Boot con Jbpm</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -49,14 +49,6 @@
 		<dependency>
 			<groupId>org.kie.server</groupId>
 			<artifactId>kie-server-client</artifactId>
-			<version>${jbpm.version}</version>
-		</dependency>
-
-		<!-- For runtime commands -->
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<scope>runtime</scope>
 			<version>${jbpm.version}</version>
 		</dependency>
 

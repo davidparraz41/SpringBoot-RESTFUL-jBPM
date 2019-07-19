@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.model.enums;
+package com.rentacar.model.enums;
 
 /**
  * @author David Parra

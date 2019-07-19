@@ -4,11 +4,14 @@
 package com.rentacar.process;
 
 import org.kie.server.api.marshalling.MarshallingFormat;
+import org.kie.server.client.JobServicesClient;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
 import org.kie.server.client.ProcessServicesClient;
 import org.kie.server.client.UserTaskServicesClient;
+
+import com.rentacar.utils.Constantes;
 
 /**
  * Clase tipo singleton para configurar la conexion con el servidor KIE
@@ -19,23 +22,19 @@ import org.kie.server.client.UserTaskServicesClient;
 public class SetupProcessManagement {
 
 	private static SetupProcessManagement instance = null;
-	// REST API base URL, credentials, and marshalling format
-	private static final String URL = "http://localhost:8080/kie-server/services/rest/server";
-	private static final String USER = "kieserver";
-	private static final String PASSWORD = "kieserver";
 
 	private static final MarshallingFormat FORMAT = MarshallingFormat.JSON;
 
 	private static KieServicesConfiguration conf;
 
-	
 	private static KieServicesClient kieServicesClient;
 
 	private static ProcessServicesClient processClient;
-	private static UserTaskServicesClient userTaskClient;
+	private static JobServicesClient jobServicesClient;
 
 	private void initializeKieServerClient() {
-		conf = KieServicesFactory.newRestConfiguration(URL, USER, PASSWORD);
+		conf = KieServicesFactory.newRestConfiguration(Constantes.URL_SERVER_KIE, Constantes.USER_SERVER_KIE,
+				Constantes.PASSWORD_SERVER_KIE);
 		conf.setMarshallingFormat(FORMAT);
 		kieServicesClient = KieServicesFactory.newKieServicesClient(conf);
 		initializeJbpmServiceClients();
@@ -43,15 +42,22 @@ public class SetupProcessManagement {
 
 	private void initializeJbpmServiceClients() {
 		processClient = kieServicesClient.getServicesClient(ProcessServicesClient.class);
-		userTaskClient = kieServicesClient.getServicesClient(UserTaskServicesClient.class);
+		jobServicesClient = kieServicesClient.getServicesClient(JobServicesClient.class);
 	}
 
 	public ProcessServicesClient getProcessClient() {
 		return processClient;
 	}
 
-	public UserTaskServicesClient getUserTaskClient() {
-		return userTaskClient;
+	public UserTaskServicesClient getUserTaskClient(String user, String password) {
+		conf = KieServicesFactory.newRestConfiguration(Constantes.URL_SERVER_KIE, user, password);
+		conf.setMarshallingFormat(FORMAT);
+		kieServicesClient = KieServicesFactory.newKieServicesClient(conf);
+		return kieServicesClient.getServicesClient(UserTaskServicesClient.class);
+	}
+
+	public static JobServicesClient getJobServicesClient() {
+		return jobServicesClient;
 	}
 
 	private SetupProcessManagement() {

@@ -1,4 +1,4 @@
-package com.example.model.enums;
+package com.rentacar.model.enums;
 
 public enum PerfilUsuario {
 	EJECUTIVO, SOLICITANTE

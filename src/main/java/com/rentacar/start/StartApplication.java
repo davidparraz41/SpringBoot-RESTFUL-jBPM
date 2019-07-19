@@ -53,6 +53,7 @@ public class StartApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		System.out.println("la aplicacion ha iniciado");
 		System.out.println("grabando datos en la base de datos");
 		Persona persona = new Persona();
@@ -64,8 +65,8 @@ public class StartApplication implements CommandLineRunner {
 		personaRepository.save(persona);
 
 		Usuario usuario = new Usuario();
-		usuario.setNombreUsuario("solicitante");
-		usuario.setContrasena("1234");
+		usuario.setNombreUsuario("wbadmin");
+		usuario.setContrasena("wbadmin");
 		usuario.setActivo(true);
 		usuario.setPersona(persona);
 		usuario.setPerfilUsuario(PerfilUsuario.SOLICITANTE);
@@ -80,8 +81,8 @@ public class StartApplication implements CommandLineRunner {
 		personaRepository.save(persona);
 
 		usuario = new Usuario();
-		usuario.setNombreUsuario("ejecutivo");
-		usuario.setContrasena("1234");
+		usuario.setNombreUsuario("kieserver");
+		usuario.setContrasena("kieserver1!");
 		usuario.setActivo(true);
 		usuario.setPersona(persona);
 		usuario.setPerfilUsuario(PerfilUsuario.EJECUTIVO);

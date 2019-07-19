@@ -39,7 +39,7 @@ public class ProcessController {
 	public ResponseEntity<List<TareaDto>> obtenerTareasReservadasDeUsuario(@RequestBody UsuarioDto usuarioDto) {
 		try {
 			return new ResponseEntity<>(processService.obtenerTareasDeUsuario(usuarioDto.getNombreUsuario(),
-					Arrays.asList(Status.Reserved.name())), HttpStatus.OK);
+					Arrays.asList(Status.Reserved.name(), Status.Ready.name())), HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error > " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
