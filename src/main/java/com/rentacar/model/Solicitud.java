@@ -32,7 +32,9 @@ public class Solicitud {
 	@JoinColumn(name = "solicitante_id")
 	private Persona solicitante;
 
-	private LocalDateTime fechaHora;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 
 	@Enumerated(EnumType.STRING)
 	private EstadoSolicitud estadoSolicitud;
@@ -41,6 +43,7 @@ public class Solicitud {
 	@JoinColumn(name = "modelo_id")
 	private Modelo modelo;
 
+	private LocalDateTime fechaHora;
 	private String descripcion;
 
 	/**
@@ -125,6 +128,20 @@ public class Solicitud {
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

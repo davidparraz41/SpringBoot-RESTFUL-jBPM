@@ -9,7 +9,7 @@ public interface MarcaService {
 	/**
 	 * Obtiene todas las marces registradas en la base de datos
 	 * 
-	 * @return java.util.List de MarcaDto
+	 * @return List de MarcaDto
 	 */
 	List<MarcaDto> obtenerTodasLasMarcas();
 

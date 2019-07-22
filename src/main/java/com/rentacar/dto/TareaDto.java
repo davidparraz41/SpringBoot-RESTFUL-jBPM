@@ -18,6 +18,7 @@ public class TareaDto {
 	private String descripcion;
 	private String fechaCreacion;
 	private String usuario;
+	private List<String> estados = new ArrayList<>();
 	private List<VariableDto> variables = new ArrayList<>();
 
 	/**
@@ -116,6 +117,20 @@ public class TareaDto {
 	 */
 	public void setVariables(List<VariableDto> variables) {
 		this.variables = variables;
+	}
+
+	/**
+	 * @return the estados
+	 */
+	public List<String> getEstados() {
+		return estados;
+	}
+
+	/**
+	 * @param estados the estados to set
+	 */
+	public void setEstados(List<String> estados) {
+		this.estados = estados;
 	}
 
 }

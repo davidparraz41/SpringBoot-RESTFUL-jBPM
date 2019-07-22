@@ -10,22 +10,21 @@ public interface ProcessService {
 	/**
 	 * Obtiene las tareas de un usuario
 	 * 
-	 * @param usuario
-	 * @param estados
-	 * @return List<TareaDto>
+	 * @param tareaDto
+	 * @return
+	 * @throws Exception
 	 */
-	List<TareaDto> obtenerTareasDeUsuario(String usuario, List<String> estados) throws Exception;
+	List<TareaDto> obtenerTareasDeUsuario(TareaDto tareaDto);
 
 	/**
 	 * Crea una nueva instancia de proceso
 	 * 
 	 * @param idContenedor
 	 * @param nombreProceso
-	 * @param idSolicitud
-	 * @return processInstanceId
-	 * @throws Exception
+	 * @param variables
+	 * @return
 	 */
-	Long startProcess(String idContenedor, String nombreProceso, List<VariableDto> variables) throws Exception;
+	Long startProcess(String idContenedor, String nombreProceso, List<VariableDto> variables);
 
 	/**
 	 * Reclama una tarea
@@ -34,7 +33,7 @@ public interface ProcessService {
 	 * @param tareaDto
 	 * @throws Exception
 	 */
-	void reclamarTarea(String idContenedor, TareaDto tareaDto) throws Exception;
+	void reclamarTarea(String idContenedor, TareaDto tareaDto);
 
 	/**
 	 * Completa una tarea
@@ -42,7 +41,7 @@ public interface ProcessService {
 	 * @param tareaDto
 	 * @throws Exception
 	 */
-	void completarTarea(String idContenedor, TareaDto tareaDto) throws Exception;
+	void completarTarea(String idContenedor, TareaDto tareaDto);
 
 	/**
 	 * Inicia una tarea
@@ -51,6 +50,6 @@ public interface ProcessService {
 	 * @param tareaDto
 	 * @throws Exception
 	 */
-	void iniciarTarea(String idContenedor, TareaDto tareaDto) throws Exception;
+	void iniciarTarea(String idContenedor, TareaDto tareaDto);
 
 }

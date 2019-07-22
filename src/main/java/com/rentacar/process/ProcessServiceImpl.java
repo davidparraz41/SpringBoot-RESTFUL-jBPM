@@ -15,9 +15,10 @@ import com.rentacar.dto.VariableDto;
 import com.rentacar.mapper.MapperObject;
 import com.rentacar.model.Usuario;
 import com.rentacar.repository.UsuarioRepository;
+import com.rentacar.utils.Constantes;
 
 /**
- * Clase con servicios relacionados con operaciones sobre el motor de proceso
+ * Clase con servicios relacionados con operaciones sobre el motor de procesos JBPM
  * 
  * @author David Parra
  *
@@ -29,44 +30,46 @@ public class ProcessServiceImpl implements ProcessService {
 	UsuarioRepository usuarioRepository;
 
 	@Override
-	public Long startProcess(String idContenedor, String nombreProceso, List<VariableDto> variables) throws Exception {
+	public Long startProcess(String idContenedor, String nombreProceso, List<VariableDto> variables) {
 		Map<String, Object> mapa = MapperObject.mapearVariables(variables);
-		SetupProcessManagement management = SetupProcessManagement.getInstance();
+		SetupProcessManagement management = new SetupProcessManagement(Constantes.DEFAULT_USER_SERVER_KIE,
+				Constantes.DEFAULT_USER_PASS_SERVER_KIE);
 		return management.getProcessClient().startProcess(idContenedor, nombreProceso, mapa);
 	}
 
 	@Override
-	public List<TareaDto> obtenerTareasDeUsuario(String nombreUsuario, List<String> estadosTarea) throws Exception {
-		Usuario usuario = usuarioRepository.obtenerPorNombreUsuario(nombreUsuario);
-		SetupProcessManagement management = SetupProcessManagement.getInstance();
-		return management.getUserTaskClient(usuario.getNombreUsuario(), usuario.getContrasena())
-				.findTasksAssignedAsPotentialOwner(usuario.getNombreUsuario(), estadosTarea, 0, 100).stream()
+	public List<TareaDto> obtenerTareasDeUsuario(TareaDto tareaDto) {
+		Usuario usuario = usuarioRepository.obtenerPorNombreUsuario(tareaDto.getUsuario());
+		SetupProcessManagement management = new SetupProcessManagement(usuario.getNombreUsuario(),
+				usuario.getContrasena());
+		return management.getUserTaskClient()
+				.findTasksAssignedAsPotentialOwner(usuario.getNombreUsuario(), tareaDto.getEstados(), 0, 100).stream()
 				.map(task -> MapperObject.contruirTareaDto(task)).collect(Collectors.toList());
 	}
 
 	@Override
-	public void reclamarTarea(String idContenedor, TareaDto tareaDto) throws Exception {
+	public void reclamarTarea(String idContenedor, TareaDto tareaDto) {
 		Usuario usuario = usuarioRepository.obtenerPorNombreUsuario(tareaDto.getUsuario());
-		SetupProcessManagement management = SetupProcessManagement.getInstance();
-		management.getUserTaskClient(usuario.getNombreUsuario(), usuario.getContrasena()).claimTask(idContenedor,
-				tareaDto.getId(), tareaDto.getUsuario());
+		SetupProcessManagement management = new SetupProcessManagement(usuario.getNombreUsuario(),
+				usuario.getContrasena());
+		management.getUserTaskClient().claimTask(idContenedor, tareaDto.getId(), tareaDto.getUsuario());
 	}
 
 	@Override
-	public void completarTarea(String idContenedor, TareaDto tareaDto) throws Exception {
+	public void completarTarea(String idContenedor, TareaDto tareaDto) {
 		Map<String, Object> variables = MapperObject.mapearVariables(tareaDto.getVariables());
 		Usuario usuario = usuarioRepository.obtenerPorNombreUsuario(tareaDto.getUsuario());
-		SetupProcessManagement management = SetupProcessManagement.getInstance();
-		management.getUserTaskClient(usuario.getNombreUsuario(), usuario.getContrasena()).completeTask(idContenedor,
-				tareaDto.getId(), tareaDto.getUsuario(), variables);
+		SetupProcessManagement management = new SetupProcessManagement(usuario.getNombreUsuario(),
+				usuario.getContrasena());
+		management.getUserTaskClient().completeTask(idContenedor, tareaDto.getId(), tareaDto.getUsuario(), variables);
 	}
 
 	@Override
-	public void iniciarTarea(String idContenedor, TareaDto tareaDto) throws Exception {
+	public void iniciarTarea(String idContenedor, TareaDto tareaDto) {
 		Usuario usuario = usuarioRepository.obtenerPorNombreUsuario(tareaDto.getUsuario());
-		SetupProcessManagement management = SetupProcessManagement.getInstance();
-		management.getUserTaskClient(usuario.getNombreUsuario(), usuario.getContrasena()).startTask(idContenedor,
-				tareaDto.getId(), tareaDto.getUsuario());
+		SetupProcessManagement management = new SetupProcessManagement(usuario.getNombreUsuario(),
+				usuario.getContrasena());
+		management.getUserTaskClient().startTask(idContenedor, tareaDto.getId(), tareaDto.getUsuario());
 	}
 
 }

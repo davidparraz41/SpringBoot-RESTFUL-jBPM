@@ -1,5 +1,6 @@
 package com.rentacar.start;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.rentacar.model.Marca;
@@ -16,6 +18,7 @@ import com.rentacar.model.Persona;
 import com.rentacar.model.Usuario;
 import com.rentacar.model.Vehiculo;
 import com.rentacar.model.enums.PerfilUsuario;
+import com.rentacar.process.ProcessService;
 import com.rentacar.repository.MarcaRepository;
 import com.rentacar.repository.ModeloRepository;
 import com.rentacar.repository.PersonaRepository;
@@ -47,15 +50,20 @@ public class StartApplication implements CommandLineRunner {
 	@Autowired
 	VehiculoRepository vehiculoRepository;
 
-	public static void main(String[] args) {
+	@Autowired
+	ProcessService processService;
+
+	@Autowired
+	Environment environment;
+
+	public static void main(String[] args) throws IOException {
 		SpringApplication.run(StartApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		System.out.println("la aplicacion ha iniciado");
-		System.out.println("grabando datos en la base de datos");
+		System.out.println("Iniciando la aplicacion...");
+		System.out.println("Grabando datos iniciales en la base de datos...");
 		Persona persona = new Persona();
 		persona.setNombre("persona1");
 		persona.setRut(11111111);
@@ -111,8 +119,7 @@ public class StartApplication implements CommandLineRunner {
 		modelo.setNombre("Ranger");
 		modelo.setMarca(marca);
 		modeloRepository.save(modelo);
-
-		System.out.println("todo OK");
+		System.out.println("Los datos se han guardado con exito");
 	}
 
 }

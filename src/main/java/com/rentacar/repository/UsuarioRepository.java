@@ -6,6 +6,10 @@ import org.springframework.data.repository.query.Param;
 
 import com.rentacar.model.Usuario;
 
+/**
+ * @author David Parra
+ *
+ */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	@Query("From Usuario u where u.nombreUsuario=:nombreUsuario")

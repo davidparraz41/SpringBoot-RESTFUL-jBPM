@@ -33,12 +33,11 @@ public class SolicitudController {
 	public ResponseEntity<Void> crearSolicitudDeCotizacion(@RequestBody SolicitudDto solicitudDto) {
 		try {
 			solicitudService.crearSolicitud(solicitudDto);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (Exception e) {
 			logger.error("Error > " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
 }

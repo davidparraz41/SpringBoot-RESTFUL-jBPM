@@ -6,9 +6,13 @@ import org.springframework.data.repository.query.Param;
 
 import com.rentacar.model.Persona;
 
+/**
+ * @author David Parra
+ *
+ */
 public interface PersonaRepository extends JpaRepository<Persona, Long> {
 
-	@Query("SELECT p FROM Persona p WHERE p.rut=:rut")
+	@Query("From Persona p WHERE p.rut=:rut")
 	public Persona obtenerPersonaPorRut(@Param("rut") Integer rut);
 
 }

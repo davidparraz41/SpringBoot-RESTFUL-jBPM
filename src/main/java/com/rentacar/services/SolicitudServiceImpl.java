@@ -37,7 +37,7 @@ public class SolicitudServiceImpl implements SolicitudService {
 	ProcessService processService;
 
 	@Override
-	public void crearSolicitud(SolicitudDto solicitudDto) throws Exception {
+	public void crearSolicitud(SolicitudDto solicitudDto) {
 		Solicitud solicitud = new Solicitud();
 		solicitud.setSolicitante(personaService.obtenerPersonaPorRut(solicitudDto.getSolicitante().getRut()));
 		solicitud.setDescripcion(solicitudDto.getDescripcion());
@@ -45,14 +45,21 @@ public class SolicitudServiceImpl implements SolicitudService {
 		solicitud.setEstadoSolicitud(EstadoSolicitud.ACTIVA);
 		solicitud.setModelo(modeloService.obtenerModeloPorId(solicitudDto.getModelo().getId()));
 		solicitudRepository.save(solicitud);
-		iniciarProcesoDeSolicitud(solicitud.getSolicitante().getNombre(), solicitud.getId());
+		iniciarProcesoDeSolicitud(solicitud.getId());
 	}
 
-	private void iniciarProcesoDeSolicitud(String usuario, Long idSolicitud) throws Exception {
+	/**
+	 * Inicia un proceso de solicitud de cotizacion
+	 * 
+	 * @param usuario
+	 * @param idSolicitud
+	 * @throws Exception
+	 */
+	private void iniciarProcesoDeSolicitud(Long idSolicitud) {
 		VariableDto variableDto = new VariableDto();
 		variableDto.setNombre("idSolicitud");
 		variableDto.setValor(idSolicitud.toString());
-		processService.startProcess(Constantes.CONTENEDOR, Constantes.PROCESO_SOLICITUD_COTIZACION,
+		processService.startProcess(Constantes.ID_CONTENEDOR, Constantes.PROCESO_SOLICITUD_COTIZACION,
 				Arrays.asList(variableDto));
 	}
 

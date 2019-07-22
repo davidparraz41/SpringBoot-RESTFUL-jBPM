@@ -3,10 +3,8 @@
  */
 package com.rentacar.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.kie.api.task.model.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentacar.dto.TareaDto;
-import com.rentacar.dto.UsuarioDto;
 import com.rentacar.process.ProcessService;
 import com.rentacar.utils.Constantes;
 
@@ -36,10 +33,9 @@ public class ProcessController {
 	ProcessService processService;
 
 	@PostMapping("Tareas/Usuario")
-	public ResponseEntity<List<TareaDto>> obtenerTareasReservadasDeUsuario(@RequestBody UsuarioDto usuarioDto) {
+	public ResponseEntity<List<TareaDto>> obtenerTareasDeUsuario(@RequestBody TareaDto tareaDto) {
 		try {
-			return new ResponseEntity<>(processService.obtenerTareasDeUsuario(usuarioDto.getNombreUsuario(),
-					Arrays.asList(Status.Reserved.name(), Status.Ready.name())), HttpStatus.OK);
+			return new ResponseEntity<>(processService.obtenerTareasDeUsuario(tareaDto), HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error > " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,7 +45,7 @@ public class ProcessController {
 	@PostMapping("Tarea/Completar")
 	public ResponseEntity<Void> completarTarea(@RequestBody TareaDto tareaDto) {
 		try {
-			processService.completarTarea(Constantes.CONTENEDOR, tareaDto);
+			processService.completarTarea(Constantes.ID_CONTENEDOR, tareaDto);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error > " + e.getMessage());
@@ -60,7 +56,7 @@ public class ProcessController {
 	@PostMapping("Tarea/Reclamar")
 	public ResponseEntity<Void> reclamarTarea(@RequestBody TareaDto tareaDto) {
 		try {
-			processService.reclamarTarea(Constantes.CONTENEDOR, tareaDto);
+			processService.reclamarTarea(Constantes.ID_CONTENEDOR, tareaDto);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error > " + e.getMessage());
@@ -71,7 +67,7 @@ public class ProcessController {
 	@PostMapping("Tarea/Iniciar")
 	public ResponseEntity<Void> iniciarTarea(@RequestBody TareaDto tareaDto) {
 		try {
-			processService.iniciarTarea(Constantes.CONTENEDOR, tareaDto);
+			processService.iniciarTarea(Constantes.ID_CONTENEDOR, tareaDto);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error > " + e.getMessage());

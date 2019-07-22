@@ -7,7 +7,7 @@ import com.rentacar.model.Persona;
 public interface PersonaService {
 
 	/**
-	 * Crea una neuva persona
+	 * Crea una nueva persona
 	 * 
 	 * @param persona
 	 */
@@ -17,14 +17,14 @@ public interface PersonaService {
 	 * Obtiene una persona por rut
 	 * 
 	 * @param rut
-	 * @return
+	 * @return Persona
 	 */
 	Persona obtenerPersonaPorRut(Integer rut);
 
 	/**
 	 * Obtiene todas las personas
 	 * 
-	 * @return
+	 * @return List de Persona
 	 */
 	List<Persona> obtenerTodasLasPersona();
 
