@@ -21,6 +21,8 @@
 		<jbpm.version>7.23.0.Final</jbpm.version>
 	</properties>
 
+	
+
 	<dependencies>
 
 		<dependency>
@@ -52,8 +54,8 @@
 			<artifactId>kie-server-client</artifactId>
 			<version>${jbpm.version}</version>
 		</dependency>
-		
-		
+
+
 
 
 	</dependencies>

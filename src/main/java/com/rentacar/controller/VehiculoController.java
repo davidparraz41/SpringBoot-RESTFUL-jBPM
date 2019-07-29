@@ -38,7 +38,6 @@ public class VehiculoController {
 			logger.error("Error > " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
 }
