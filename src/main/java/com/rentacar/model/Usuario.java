@@ -30,7 +30,7 @@ public class Usuario {
 	private boolean activo;
 	private Integer calificacion;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "region_id")
+	@JoinColumn(name = "persona_id")
 	private Persona persona;
 
 	@Enumerated(EnumType.STRING)
