@@ -27,7 +27,7 @@ La idea es que la configuración del proyecto sea ágil y centralizada, por lo t
 Para iniciar y probar las funcionalidades del proyecto se deben seguir los siguientes pasos de configuración:
 1. 	Crear el usuario y la base de datos según el archivo de propiedades
 2. 	Descargar e iniciar el servidor de jBPM.
-3. 	Crear e importar el proceso de solicitud (archivo solicitudCotizacion.bpmn incluido en el proyecto) siguiendo las siguientes acciones:
+3. 	Crear e importar el proceso de solicitud (archivo solicitudCotizacion.bpmn incluido en el proyecto) siguiendo las siguientes acciones en el panel central de la herramienta jbpm (http://localhost:8080/business-central):
 
 ###### Login -> Design -> MySpace -> Add Project[nombre: rentacar] -> Import Asset[cargar archivo “solicitudCotizacion.bpmn”] -> Deploy
 
