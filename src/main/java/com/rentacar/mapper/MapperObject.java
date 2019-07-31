@@ -27,6 +27,10 @@ import com.rentacar.utils.FechaUtil;
  */
 public class MapperObject {
 
+	private MapperObject() {
+
+	}
+
 	/**
 	 * Construye un objeto vehiculoDto (DTO) a partir de un objeto Vehiculo (Entity)
 	 * 

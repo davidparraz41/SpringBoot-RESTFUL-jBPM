@@ -11,8 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Clase con constantes que se inicializan a partir del archivo de un
- * propiedades
+ * Clase con constantes que se inicializan a partir de un archivo de propiedades
  * 
  * @author David Parra
  *
@@ -53,7 +52,7 @@ public class Constantes {
 			inputStream.close();
 			props.putAll(others);
 		} catch (IOException e) {
-			logger.error("Error al leer el archivo de propiedades, Detalle > " + e.getCause());
+			logger.error("Error al leer el archivo de propiedades, Detalle > " + e.getMessage());
 		}
 	}
 

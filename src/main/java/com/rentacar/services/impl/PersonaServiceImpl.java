@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rentacar.services;
+package com.rentacar.services.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.rentacar.model.Persona;
 import com.rentacar.repository.PersonaRepository;
+import com.rentacar.services.PersonaService;
 
 /**
  * @author David Parra

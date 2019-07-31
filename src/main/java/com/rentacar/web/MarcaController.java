@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rentacar.controller;
+package com.rentacar.web;
 
 import java.util.List;
 
@@ -14,30 +14,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rentacar.dto.VehiculoDto;
-import com.rentacar.services.VehiculoService;
+import com.rentacar.dto.MarcaDto;
+import com.rentacar.services.MarcaService;
 
 /**
  * @author David Parra
  *
  */
 @RestController
-@RequestMapping("Rest/Vehiculo")
-public class VehiculoController {
+@RequestMapping("Rest/Marca")
+public class MarcaController {
 
-	private static final Logger logger = LoggerFactory.getLogger(VehiculoController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MarcaController.class);
 
 	@Autowired
-	VehiculoService vehiculoService;
+	MarcaService marcaService;
 
-	@GetMapping("Vehiculos")
-	public ResponseEntity<List<VehiculoDto>> obtenerTodosLosVehiculos() {
+	@GetMapping("Marcas")
+	public ResponseEntity<List<MarcaDto>> obtenerTodasLasMarcas() {
 		try {
-			return new ResponseEntity<>(vehiculoService.obtenerTodosLosVehiculos(), HttpStatus.OK);
+			return new ResponseEntity<>(marcaService.obtenerTodasLasMarcas(), HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error > " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+
 	}
 
 }

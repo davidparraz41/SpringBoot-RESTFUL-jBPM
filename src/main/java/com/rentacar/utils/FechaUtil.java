@@ -10,10 +10,16 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 /**
+ * Clase con utilidades
+ * 
  * @author David Parra
  *
  */
 public class FechaUtil {
+
+	private FechaUtil() {
+
+	}
 
 	/**
 	 * Convierte una fecha de tipo Java.util.Date a String dado el patron

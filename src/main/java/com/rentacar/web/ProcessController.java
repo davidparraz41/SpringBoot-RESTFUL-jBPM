@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rentacar.controller;
+package com.rentacar.web;
 
 import java.util.List;
 

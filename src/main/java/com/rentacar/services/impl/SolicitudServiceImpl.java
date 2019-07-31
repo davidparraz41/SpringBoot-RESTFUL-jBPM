@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rentacar.services;
+package com.rentacar.services.impl;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -15,6 +15,9 @@ import com.rentacar.model.Solicitud;
 import com.rentacar.model.enums.EstadoSolicitud;
 import com.rentacar.process.ProcessService;
 import com.rentacar.repository.SolicitudRepository;
+import com.rentacar.services.ModeloService;
+import com.rentacar.services.PersonaService;
+import com.rentacar.services.SolicitudService;
 import com.rentacar.utils.Constantes;
 
 /**
